@@ -1,0 +1,8 @@
+node_modules/
+package.json
+package-lock.json
+vitest.config.js
+*.test.js
+test-output.txt
+.DS_Store
+Thumbs.db

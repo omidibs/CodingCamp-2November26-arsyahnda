@@ -1,0 +1,165 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Set up project structure and shared infrastructure": [
+      {
+        "executionId": "8156413c-88aa-4482-a3f4-5258ea6c6d27",
+        "chatSessionId": "sess_73d94c58-973c-46c9-863a-d6f4bee6f09b",
+        "timestamp": 1793885274748
+      },
+      {
+        "executionId": "8156413c-88aa-4482-a3f4-5258ea6c6d27",
+        "chatSessionId": "sess_73d94c58-973c-46c9-863a-d6f4bee6f09b",
+        "timestamp": 1793885845533
+      }
+    ],
+    "2.1 Implement StorageService module": [
+      {
+        "executionId": "92dc3db7-69ad-4b62-a816-29817968f711",
+        "chatSessionId": "sess_1b8eea85-82a0-448c-b245-36ab308b1093",
+        "timestamp": 1793885858687
+      },
+      {
+        "executionId": "92dc3db7-69ad-4b62-a816-29817968f711",
+        "chatSessionId": "sess_1b8eea85-82a0-448c-b245-36ab308b1093",
+        "timestamp": 1793886029091
+      }
+    ],
+    "2. Implement StorageService": [
+      {
+        "executionId": "92dc3db7-69ad-4b62-a816-29817968f711",
+        "chatSessionId": "sess_1b8eea85-82a0-448c-b245-36ab308b1093",
+        "timestamp": 1793886029224
+      }
+    ],
+    "3.1 Implement validation helpers": [
+      {
+        "executionId": "a9975e39-fbad-42e6-9ffb-dc06ba822d63",
+        "chatSessionId": "sess_d75714f2-07bb-4fef-a84f-fd0e641ff338",
+        "timestamp": 1793886041485
+      },
+      {
+        "executionId": "a9975e39-fbad-42e6-9ffb-dc06ba822d63",
+        "chatSessionId": "sess_d75714f2-07bb-4fef-a84f-fd0e641ff338",
+        "timestamp": 1793886157481
+      }
+    ],
+    "3. Implement shared validation helpers and data model utilities": [
+      {
+        "executionId": "a9975e39-fbad-42e6-9ffb-dc06ba822d63",
+        "chatSessionId": "sess_d75714f2-07bb-4fef-a84f-fd0e641ff338",
+        "timestamp": 1793886157549
+      }
+    ],
+    "6.1 Implement `computeGreeting(hour, name?)` pure function and GreetingWidget": [
+      {
+        "executionId": "7c66aea7-7a20-40ee-a7df-ce4ae25683af",
+        "chatSessionId": "sess_143ed673-621d-464b-a2c1-cc1bd88fc87c",
+        "timestamp": 1793887449934
+      },
+      {
+        "executionId": "ef5fd87f-5366-4814-a5b1-2de877cfaa70",
+        "chatSessionId": "sess_143ed673-621d-464b-a2c1-cc1bd88fc87c",
+        "timestamp": 1793893228918
+      },
+      {
+        "executionId": "ef5fd87f-5366-4814-a5b1-2de877cfaa70",
+        "chatSessionId": "sess_143ed673-621d-464b-a2c1-cc1bd88fc87c",
+        "timestamp": 1793893333166
+      }
+    ],
+    "7.1 Implement FocusTimerWidget state machine and UI": [
+      {
+        "executionId": "93ef7b77-d6e3-4b49-8446-c7acbe409a27",
+        "chatSessionId": "sess_1c9c0b93-efc7-4782-8e66-246c2e9bf088",
+        "timestamp": 1793888398973
+      },
+      {
+        "executionId": "2b787985-0af6-4381-b75b-010ac65cefd7",
+        "chatSessionId": "sess_1c9c0b93-efc7-4782-8e66-246c2e9bf088",
+        "timestamp": 1793893072709
+      },
+      {
+        "executionId": "2b787985-0af6-4381-b75b-010ac65cefd7",
+        "chatSessionId": "sess_1c9c0b93-efc7-4782-8e66-246c2e9bf088",
+        "timestamp": 1793893194557
+      }
+    ],
+    "7. Implement FocusTimerWidget": [
+      {
+        "executionId": "2b787985-0af6-4381-b75b-010ac65cefd7",
+        "chatSessionId": "sess_1c9c0b93-efc7-4782-8e66-246c2e9bf088",
+        "timestamp": 1793893194673
+      }
+    ],
+    "6. Implement GreetingWidget": [
+      {
+        "executionId": "ef5fd87f-5366-4814-a5b1-2de877cfaa70",
+        "chatSessionId": "sess_143ed673-621d-464b-a2c1-cc1bd88fc87c",
+        "timestamp": 1793893333279
+      }
+    ],
+    "9.1 Implement `addTask` and initial render": [
+      {
+        "executionId": "2c63cf3c-99d8-4425-9db5-a1936688e467",
+        "chatSessionId": "sess_43359dda-d78d-4855-a8c1-a7d7e64c0827",
+        "timestamp": 1793893381177
+      },
+      {
+        "executionId": "2c63cf3c-99d8-4425-9db5-a1936688e467",
+        "chatSessionId": "sess_43359dda-d78d-4855-a8c1-a7d7e64c0827",
+        "timestamp": 1793893565695
+      }
+    ],
+    "9.4 Implement `toggleTask` (mark complete/incomplete)": [
+      {
+        "executionId": "8f18edd7-8cae-40a0-866c-22cb23cda1ee",
+        "chatSessionId": "sess_50a5c806-eaa8-4eee-b288-bbe94cdd2677",
+        "timestamp": 1793893589639
+      },
+      {
+        "executionId": "8f18edd7-8cae-40a0-866c-22cb23cda1ee",
+        "chatSessionId": "sess_50a5c806-eaa8-4eee-b288-bbe94cdd2677",
+        "timestamp": 1793894820118
+      }
+    ],
+    "9.6 Implement `deleteTask`": [
+      {
+        "executionId": "674a5069-b8fb-4d68-b538-1f5ff3493193",
+        "chatSessionId": "sess_cf5ce562-5263-4084-9a6b-1086dfc7bb0a",
+        "timestamp": 1793894830203
+      },
+      {
+        "executionId": "674a5069-b8fb-4d68-b538-1f5ff3493193",
+        "chatSessionId": "sess_cf5ce562-5263-4084-9a6b-1086dfc7bb0a",
+        "timestamp": 1793894923400
+      }
+    ],
+    "9. Implement TodoWidget — core CRUD": [
+      {
+        "executionId": "674a5069-b8fb-4d68-b538-1f5ff3493193",
+        "chatSessionId": "sess_cf5ce562-5263-4084-9a6b-1086dfc7bb0a",
+        "timestamp": 1793894923541
+      }
+    ],
+    "13.1 Implement responsive layout, typographic scale, and theme color tokens in `styles.css`": [
+      {
+        "executionId": "a72a7f41-1535-4483-a945-3c80c4e5ed26",
+        "chatSessionId": "sess_0d4c5076-401f-47b4-92c1-edb3ad091299",
+        "timestamp": 1793894964187
+      },
+      {
+        "executionId": "a72a7f41-1535-4483-a945-3c80c4e5ed26",
+        "chatSessionId": "sess_0d4c5076-401f-47b4-92c1-edb3ad091299",
+        "timestamp": 1793895145059
+      }
+    ],
+    "13. Apply CSS layout, visual design, and theme tokens": [
+      {
+        "executionId": "a72a7f41-1535-4483-a945-3c80c4e5ed26",
+        "chatSessionId": "sess_0d4c5076-401f-47b4-92c1-edb3ad091299",
+        "timestamp": 1793895145451
+      }
+    ]
+  }
+}

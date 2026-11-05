@@ -1,0 +1,585 @@
+/* ============================================================
+   Todo Life Dashboard — styles.css
+   All visual styling lives here; no inline styles or <style> blocks
+   ============================================================ */
+
+/* ── CSS Custom Properties (Light Theme defaults) ── */
+:root {
+  /* Page background gradient & fallback */
+  --color-bg:               #667eea;
+  --bg-gradient:            linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --color-surface:          #ffffff;
+  --color-surface-subtle:   #f8fafc;
+
+  /* Text — light theme: #1e293b on #ffffff → contrast ≈ 13.5:1 ✓ (≥ 4.5:1) */
+  --color-text:             #2d3748;
+  /* Muted text — #64748b on #ffffff → contrast ≈ 4.8:1 ✓ (≥ 4.5:1) */
+  --color-text-muted:       #64748b;
+
+  /* Accent / Primary Indigo (matches reference screenshot) */
+  --color-accent:           #667eea;
+  --color-primary:          #667eea;
+  --color-primary-hover:    #5a67d8;
+
+  /* Secondary button surface (Stop / Reset / Clear / Edit) */
+  --color-secondary-bg:     #e2e8f0;
+  --color-secondary-hover:  #cbd5e1;
+  --color-secondary-text:   #334155;
+
+  /* Borders & Dividers */
+  --color-border:           #cbd5e1;
+  --color-divider:          #edf2f7;
+
+  /* Danger / Delete button (matches coral-red Delete button in screenshot) */
+  --color-danger-bg:        #e55353;
+  --color-danger-hover:     #d63939;
+  --color-danger-text:      #ffffff;
+
+  /* Error / validation feedback */
+  --color-error:            #b91c1c;
+  --color-error-bg:         #fef2f2;
+
+  /* Success / done */
+  --color-done:             #15803d;
+  --color-done-bg:          #f0fdf4;
+
+  /* Card elevation */
+  --shadow-card:            0 10px 25px rgba(0, 0, 0, 0.15);
+
+  /* --- Typography --- */
+  --font-family:            system-ui, -apple-system, BlinkMacSystemFont,
+                            "Segoe UI", Roboto, sans-serif;
+
+  /* Typographic scale (Req 11.4: body >= 14px, each heading level >= 1.25x below) */
+  --font-size-base:         1rem;      /* 16 px */
+  --font-size-sm:           0.875rem;  /* 14 px */
+  --font-size-h3:           1.125rem;  /* 18 px */
+  --font-size-h2:           1.4rem;    /* 22.4 px */
+  --font-size-h1:           3rem;      /* 48 px (clock display) */
+  --font-size-timer:        3.75rem;   /* 60 px (timer digits) */
+
+  /* --- Spacing --- */
+  --space-xs:               0.25rem;   /* 4 px */
+  --space-sm:               0.5rem;    /* 8 px */
+  --space-md:               1rem;      /* 16 px */
+  --space-lg:               1.5rem;    /* 24 px */
+  --space-xl:               2rem;      /* 32 px */
+
+  /* --- Borders --- */
+  --radius-sm:              0.375rem;  /* 6 px */
+  --radius-md:              0.75rem;   /* 12 px */
+  --border-width:           1px;
+}
+
+/* ── Dark Theme Overrides ── */
+[data-theme="dark"] {
+  --color-bg:               #1a1635;
+  --bg-gradient:            linear-gradient(135deg, #1e1b4b 0%, #3b1d5e 100%);
+  --color-surface:          #1e293b;
+  --color-surface-subtle:   #0f172a;
+  --color-text:             #f8fafc;
+  --color-text-muted:       #cbd5e1;
+  --color-accent:           #818cf8;
+  --color-primary:          #6366f1;
+  --color-primary-hover:    #818cf8;
+  --color-secondary-bg:     #334155;
+  --color-secondary-hover:  #475569;
+  --color-secondary-text:   #f1f5f9;
+  --color-border:           #475569;
+  --color-divider:          #334155;
+  --color-danger-bg:        #ef4444;
+  --color-danger-hover:     #dc2626;
+  --color-danger-text:      #ffffff;
+  --color-error:            #fca5a5;
+  --color-error-bg:         #2d1f1f;
+  --color-done:             #4ade80;
+  --color-done-bg:          #1f2d27;
+  --shadow-card:            0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Reset & Base ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: hidden;
+  font-size: var(--font-size-base);
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  background-color: var(--color-bg);
+  padding: var(--space-md) var(--space-sm);
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  body {
+    padding: var(--space-xl) var(--space-lg);
+  }
+}
+
+/* ── Utility ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ── Dashboard Grid Layout (Symmetrical Bento Grid) ── */
+/*
+  - Single column on mobile (< 768px)
+  - Symmetrical 2-column grid on tablet/desktop (>= 768px):
+    - Row 1: Greeting Widget spans full width (1 / -1)
+    - Row 2: Focus Timer (left) + Tasks (right) with equal width & equal height
+    - Row 3: Quick Links spans full width (1 / -1)
+*/
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  max-width: 960px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .widget--greeting,
+  .widget--links {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ── Widget Card ── */
+.widget {
+  position: relative;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 2rem;
+  box-shadow: var(--shadow-card);
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.widget--timer,
+.widget--todo {
+  min-height: 280px;
+}
+
+.widget-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+}
+
+.widget-title--center {
+  text-align: center;
+}
+
+/* ── Theme Toggle Button (Top Right of Greeting Card) ── */
+.theme-toggle-btn {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 1.15rem;
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  font-weight: 500;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease, opacity 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn--primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn--secondary {
+  background-color: var(--color-secondary-bg);
+  color: var(--color-secondary-text);
+}
+
+.btn--secondary:hover {
+  background-color: var(--color-secondary-hover);
+}
+
+.btn--compact {
+  height: 34px;
+  padding: 0 0.85rem;
+  font-size: 0.8125rem;
+}
+
+.btn--icon {
+  background-color: var(--color-secondary-bg);
+  border: none;
+  font-size: 1.1rem;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  color: var(--color-text);
+}
+
+.btn--icon:hover {
+  background-color: var(--color-secondary-hover);
+}
+
+.btn--danger {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger-text);
+  border: none;
+  height: 28px;
+  font-size: 0.75rem;
+  padding: 0 0.65rem;
+  border-radius: 0.25rem;
+}
+
+.btn--danger:hover {
+  background-color: var(--color-danger-hover);
+}
+
+.btn--small {
+  height: 28px;
+  font-size: 0.75rem;
+  padding: 0 0.65rem;
+  border-radius: 0.25rem;
+}
+
+/* ── Inputs ── */
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0 0.75rem;
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.25);
+}
+
+.input--compact {
+  height: 34px;
+  max-width: 220px;
+  padding: 0 0.65rem;
+  font-size: 0.8125rem;
+}
+
+/* ── Error / Validation messages ── */
+.error-message {
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+  background-color: var(--color-error-bg);
+  border: var(--border-width) solid var(--color-error);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-sm);
+  margin-top: var(--space-sm);
+  word-break: break-word;
+}
+
+/* ── Greeting Widget ── */
+.widget--greeting {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.greeting-time {
+  font-size: var(--font-size-h1);
+  font-weight: 400;
+  color: var(--color-accent);
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.greeting-date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin: var(--space-xs) 0 var(--space-sm);
+}
+
+.greeting-message {
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-top: var(--space-xs);
+}
+
+.greeting-name-controls {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--space-md);
+}
+
+/* ── Focus Timer Widget ── */
+.widget--timer {
+  text-align: center;
+  justify-content: space-between;
+}
+
+.timer-display {
+  font-size: var(--font-size-timer);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  margin: auto 0;
+  padding: var(--space-sm) 0;
+  color: var(--color-accent);
+  transition: color 0.2s ease;
+}
+
+.timer-display--done {
+  color: var(--color-done);
+}
+
+.timer-done-msg {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-done);
+  background-color: var(--color-done-bg);
+  border: var(--border-width) solid var(--color-done);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-md);
+  margin: 0 auto var(--space-sm);
+  width: fit-content;
+}
+
+.timer-done-msg[hidden] {
+  display: none;
+}
+
+.timer-controls {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Todo Widget ── */
+.todo-input-row {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.todo-list {
+  list-style: none;
+  margin-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding: 0.6rem 0.25rem;
+  border-bottom: var(--border-width) solid var(--color-divider);
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item--completed .todo-item__label,
+.task--completed .todo-item__label {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+}
+
+.todo-item__checkbox {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+.todo-item__label {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  word-break: break-word;
+}
+
+.todo-item__edit-input {
+  flex: 1 1 120px;
+  min-width: 0;
+}
+
+.todo-item__actions {
+  display: flex;
+  gap: var(--space-xs);
+  flex-shrink: 0;
+}
+
+/* ── Quick Links Widget ── */
+.links-input-row {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.links-input-row .input {
+  flex: 1 1 110px;
+}
+
+.links-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.links-container:empty {
+  display: none;
+}
+
+.link-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  transition: background-color 0.15s ease;
+}
+
+.link-item:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.link-item__btn {
+  flex: 1;
+  color: #ffffff;
+  border: none;
+  padding: 0.55rem 1.75rem 0.55rem 0.75rem;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.link-item__delete {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+  border: none;
+  font-size: 0.75rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.link-item__delete:hover {
+  background-color: var(--color-danger-bg);
+}
+
+.link-item__delete:active {
+  transform: translateY(-50%);
+}
+
+/* ── Narrow viewport adjustments (< 480 px) ── */
+@media (max-width: 479px) {
+  .greeting-time {
+    font-size: 2.25rem;
+  }
+
+  .greeting-name-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .input--compact {
+    max-width: 100%;
+  }
+
+  .todo-input-row {
+    flex-wrap: wrap;
+  }
+
+  .todo-input-row .input,
+  .links-input-row .input {
+    min-width: 100%;
+  }
+
+  .links-input-row {
+    flex-direction: column;
+  }
+}

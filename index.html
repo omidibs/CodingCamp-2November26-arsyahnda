@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo Life Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <main class="dashboard-grid">
+      <!-- Greeting Widget (Full Width Top Card) -->
+      <section id="greeting-widget" class="widget widget--greeting" aria-label="Greeting">
+        <button id="theme-toggle" class="btn btn--icon theme-toggle-btn" aria-label="Toggle theme" title="Toggle Light/Dark Mode">
+          🌙
+        </button>
+        <div id="time" class="greeting-time" aria-live="polite">00:00:00</div>
+        <div id="date" class="greeting-date" aria-live="polite"></div>
+        <div id="greeting" class="greeting-message" aria-live="polite">Good Morning</div>
+        <div class="greeting-name-controls">
+          <label for="name-input" class="sr-only">Your name</label>
+          <input
+            type="text"
+            id="name-input"
+            class="input input--compact"
+            placeholder="Custom name (optional)..."
+            maxlength="100"
+          />
+          <button id="btn-save-name" class="btn btn--primary btn--compact">Save</button>
+          <button id="btn-clear-name" class="btn btn--secondary btn--compact">Clear</button>
+        </div>
+        <div id="name-error" class="error-message" aria-live="polite" hidden></div>
+      </section>
+
+      <!-- Focus Timer Widget (Left Middle Card) -->
+      <section id="timer-widget" class="widget widget--timer" aria-label="Focus Timer">
+        <h2 class="widget-title widget-title--center">Focus Timer</h2>
+        <div id="timer-display" class="timer-display" aria-live="polite" aria-label="Timer">25:00</div>
+        <span id="timer-done-msg" class="timer-done-msg" hidden>Session Complete</span>
+        <div class="timer-controls">
+          <button id="btn-start" class="btn btn--primary">Start</button>
+          <button id="btn-stop" class="btn btn--secondary">Stop</button>
+          <button id="btn-reset" class="btn btn--secondary">Reset</button>
+        </div>
+      </section>
+
+      <!-- Todo Widget (Right Middle Card) -->
+      <section id="todo-widget" class="widget widget--todo" aria-label="Tasks">
+        <h2 class="widget-title">Tasks</h2>
+        <div class="todo-input-row">
+          <label for="todo-input" class="sr-only">New task</label>
+          <input
+            type="text"
+            id="todo-input"
+            class="input"
+            placeholder="Add a new task..."
+            maxlength="500"
+          />
+          <button id="btn-add-todo" class="btn btn--primary">Add</button>
+        </div>
+        <div id="todo-error" class="error-message" aria-live="polite" hidden></div>
+        <ul id="todo-list" class="todo-list" aria-label="Tasks" role="list"></ul>
+      </section>
+
+      <!-- Quick Links Widget (Bottom Left Card) -->
+      <section id="links-widget" class="widget widget--links" aria-label="Quick Links">
+        <h2 class="widget-title">Quick Links</h2>
+        <div class="links-input-row">
+          <label for="link-label-input" class="sr-only">Link name</label>
+          <input
+            type="text"
+            id="link-label-input"
+            class="input"
+            placeholder="Link name"
+          />
+          <label for="link-url-input" class="sr-only">Link URL</label>
+          <input
+            type="url"
+            id="link-url-input"
+            class="input"
+            placeholder="URL (https://...)"
+          />
+          <button id="btn-add-link" class="btn btn--primary">Add Link</button>
+        </div>
+        <div id="link-error" class="error-message" aria-live="polite" hidden></div>
+        <div id="links-container" class="links-container" aria-label="Quick links"></div>
+      </section>
+    </main>
+
+    <script src="js/app.js" defer></script>
+  </body>
+</html>
